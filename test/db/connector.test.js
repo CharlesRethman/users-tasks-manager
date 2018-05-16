@@ -1,29 +1,34 @@
 'use strict';
 
-import * as mocha from 'mocha';
-import * as chai from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
-import { Db, MongoClient } from 'mongodb';
+const mocha = require('mocha');
+//import * as mocha from 'mocha';
+const chai = require('chai');
+//import * as chai from 'chai';
+const chaiAsPromised = require('chai-as-promised');
+//import * as chaiAsPromised from 'chai-as-promised';
+//import { Db, MongoClient } from 'mongodb';
 
-import { connectDb } from '../../src/db/connector'
-import { mongoDb } from '../../src/app';
+const connectDb = require('../../dist/db/connector').connectDb;
+//import { connectDb } from '../../db/connector'
+const mongoDb = require('../../dist/app').mongoDb;
+//import { mongoDb } from '../../app';
 
 chai.use(chaiAsPromised).should();
-const expect: Chai.ExpectStatic = chai.expect;
-const dbName: string = 'usersTasks'
+const expect = chai.expect;
+const dbName = process.env.DATABASE || 'test'
 
 
 describe('test connection function', function() {
 
-  let client: MongoClient;
-  let db: Db;
+  let client;
+  let db;
 
 
   it('should obtain a database connection object', function(done) {
     it('should get the db', function() {
       return connectDb('mongodb://localhost:27017', dbName).should.eventually
       .have.property('databaseName').equals(dbName)
-      .then((db: Db) => {
+      .then((db) => {
         expect(db.writeConcern).to.deep.equal({});
       });
 
