@@ -55,10 +55,10 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 > Label: develop-tests-and-code-for-db
 
-`connect.test.ts` and `connect.ts` module.
+`connector.test.ts` and `connector.ts` module in directory `db/`.
 
-CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module.
+CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in directory `db/`.
 
-The testing creates a collection of 'users', which are all deleted.
+The testing creates a collection of 'users' in MongoDB, which are all deleted (empty collection remains).
 
 ### 5. Develop Unit Tests and Write the Code for the Controllers
