@@ -12,8 +12,11 @@
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^4.0.2",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^1.0.0",
+    "typescript": "^2.8.3"
   },
   "scripts": {
     "start": "node app.js",
