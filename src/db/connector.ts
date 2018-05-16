@@ -2,11 +2,12 @@
 
 import { Db, MongoClient, MongoClientOptions } from 'mongodb';
 
-export async function connectDb(uri: string): Promise<MongoClient> {
+export async function connectDb(uri: string, dbName: string): Promise<Db> {
 
   try {
 
-    return await MongoClient.connect(uri);
+    const client = await MongoClient.connect(uri);
+    return client.db(dbName);
 
   } catch(e) {
 

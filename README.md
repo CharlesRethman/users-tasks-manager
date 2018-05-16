@@ -11,12 +11,9 @@ The project was regularly committed and the main commits have been tagged, this 
 1. Run the Swagger initialiser to create the boilerplate code that the API is built from.
 1. Develop the Swagger specification and test with mocks on the Swagger Editor
 1. Re-organise and simplify the directory structure, adding in the gulpfile and typescript config files, as well as the Typescript `src/` directory and the dbHandlers and workers directories (for the scheduler).
-1. Develop unit tests for the base db modules: the connector and db CRUD operations
-1. Write the code for the db modules
-1. Develop unit tests for the controllers
-1. Write the code for the controllers
-1. Develop unit tests for the workers (scheduler)
-1. Write the code  for the scheduler
+1. Develop unit tests and write the code for the base db modules: the connector and db CRUD operations
+1. Develop unit tests and write the code for the controllers
+1. Develop unit tests and write the code for the workers (scheduler)
 1. Develop e2e tests, based on the provided `curl` commands, as well as local tests in the appropriate controllers
 1. Final work to the code to ensure all tests pass and the API is constructed.
 1. Package and deploy the code to a server, ensuring the provided `curl` commands function as required.
@@ -54,10 +51,14 @@ Typescript and Gulp installed. `gulpfile.js`, `tsconfig.json` and `src/` directo
 
 Rearranged the files and directories. The `package.json` had the `"main"` and `"scripts.start"` values changed the `dist/app.js` for the new typescript-compiled main file. Swagger-node does not like the Swagger spec (`swagger.yaml`) file to be moved; it remains as `./api/swagger/swagger.yaml`.  This keeps the `$ swagger project start` command functioning, although if the `swagger.yaml` gets moved and the config option in `app.ts` is updated, `$ npm start` will work but not `swagger project start`.
 
-### 4. Develop Unit Tests for the Base DB Modules
+### 4. Develop Unit Tests and Write the Code for the Base DB Modules
 
 > Label: develop-unit-tests-for-db
 
+`connect.test.ts` and `connect.ts` module.
 
+CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module.
 
+The testing creates a collection of 'users', which are all deleted.
 
+### 5. Develop Unit Tests and Write the Code for the Controllers
