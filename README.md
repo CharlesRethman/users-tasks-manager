@@ -31,5 +31,18 @@ The project was initiated with the Swagger-Node codegen, an npm package that was
 
 Project port changed to `3000` and base route to `api/`, as per requirements. Test file copied over for easy ref. 
 
-The `/api/users`, `/api/users/{id}`, `/api/users/{user_id}/tasks` routes were added in along with the `Users`, `UserDetails`, `UserNames` definitions. The API be tested on mocks by starting the project with `$ swagger project start -m` and calling, e.g., `curl http://127.0.0.1:3000/api/users`,  `curl http://127.0.0.1:3000/api/users/1` or `curl -i -H "Content-Type: application/json" -X PUT -d '{"name":"My updated task"}' http://127.0.0.1:3000/api/users/1/tasks/1` etc.. The id is a number field as it has been decided not to use MongoDb's native ObjectId string and to use a monotonic sequencer for identifying documents instead. The sequencer is intended to be added as a db module. A front-end requesting user or task details would first have to  GET all users or tasks to obtain the id's for it's GET or UPDATE details request (this is in spec).
+The `/api/users`, `/api/users/{id}`, `/api/users/{user_id}/tasks` routes were added in along with the `Users`, `UserDetails`, `UserNames` definitions. The API be tested on mocks by starting the project with 
+```bash
+$ swagger project start -m
+```
+and calling, e.g.,
+```bash
+$ curl http://127.0.0.1:3000/api/users
+$ curl http://127.0.0.1:3000/api/users/1
+$ curl -i -H "Content-Type: application/json" -X PUT -d '{"name":"My updated task"}' http://127.0.0.1:3000/api/users/1/tasks/1
+```
+, etc.
+The id is a number field as it has been decided not to use MongoDb's native ObjectId string and to use a monotonic sequencer for identifying documents instead. The sequencer is intended to be added as a db module. A front-end requesting user or task details would first have to  GET all users or tasks to obtain the id's for it's GET or UPDATE details request (this is in spec).
+
+### Re-organise and simplify the directory structure
 
