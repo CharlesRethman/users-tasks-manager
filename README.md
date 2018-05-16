@@ -53,7 +53,7 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 ### 4. Develop Unit Tests and Write the Code for the Base DB Modules
 
-> Label: develop-unit-tests-for-db
+> Label: develop-tests-and-code-for-db
 
 `connect.test.ts` and `connect.ts` module.
 
