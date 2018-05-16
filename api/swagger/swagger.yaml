@@ -249,6 +249,8 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
     get:
+      tags:
+        - hello
       description: Returns 'Hello' to the caller
       # used as the method name of the controller
       operationId: hello

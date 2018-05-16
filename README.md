@@ -1,6 +1,8 @@
 # Users Tasks Manager
 
-API to manage users and users' tasks, including a scheduler
+API to manage users and users' tasks, including a scheduler.
+
+> A small detail: I have added `./node_modules/.bin` to my `PATH` variable so that I can install node applications locally and still run them from the command line if I am in an application root directory. If, for example, Typescript or Gulp are installed globally, the application should work but parameters on the `tsconfig.json` and `gulpfile.js` may need changing.
 
 ## How the Project was Constructed
 
@@ -44,5 +46,8 @@ $ curl -i -H "Content-Type: application/json" -X PUT -d '{"name":"My updated tas
 , etc.
 The id is a number field as it has been decided not to use MongoDb's native ObjectId string and to use a monotonic sequencer for identifying documents instead. The sequencer is intended to be added as a db module. A front-end requesting user or task details would first have to  GET all users or tasks to obtain the id's for it's GET or UPDATE details request (this is in spec).
 
-### Re-organise and simplify the directory structure
+### Re-organise and Simplify the Directory Structure, Adding in the Gulp and Typescript Config Files
+
+Typescript and Gulp installed. `gulpfile.js`, `tsconfig.json` and `src/` directory added. `./app.js` copied to `src/app.ts` and modified to 'Typescript-style'. Gulp started and `dist/app.js` created (`dist/` excluded from repo by `.gitignore`).
+
 

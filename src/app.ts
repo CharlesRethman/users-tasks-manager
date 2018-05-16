@@ -9,9 +9,12 @@ export default app; // for testing
 
 
 async function server() {
+
+  const appRoot = __dirname.substring(0, __dirname.indexOf('users-tasks-manager') + 19)
   
   const config: SwaggerExpress.Config = {
-    appRoot: __dirname.substring(0, __dirname.indexOf('users-tasks-manager') + 19) // required config
+    swaggerFile: appRoot + '/api/swagger/swagger.yaml',
+    appRoot: appRoot  // required config
   };
 
   SwaggerExpress.create(config, function(err, swaggerExpress) {
