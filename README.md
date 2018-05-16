@@ -50,4 +50,6 @@ The id is a number field as it has been decided not to use MongoDb's native Obje
 
 Typescript and Gulp installed. `gulpfile.js`, `tsconfig.json` and `src/` directory added. `./app.js` copied to `src/app.ts` and modified to 'Typescript-style'. Gulp started and `dist/app.js` created (`dist/` excluded from repo by `.gitignore`).
 
+Rearranged the files and directories. The `package.json` had the `"main"` and `"scripts.start"` values changed the `dist/app.js` for the new typescript-compiled main file. Swagger-node does not like the Swagger spec (`swagger.yaml`) file to be moved; it remains as `./api/swagger/swagger.yaml`.  This keeps the `$ swagger project start` command functioning, although if the `swagger.yaml` gets moved and the config option in `app.ts` is updated, `$ npm start` will work but not `swagger project start`.
+
 
