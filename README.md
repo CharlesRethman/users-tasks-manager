@@ -23,5 +23,9 @@ The project was regularly committed and the main commits have been tagged, this 
 
 The project was initiated with the Swagger-Node codegen, an npm package that was installed globally (`$ swagger project create users-tasks-manager`). This README was written up. The project, which is just a 'Hello World' at this stage, can be tested by running `$ swagger project start` and using the supplied command `$ curl http://127.0.0.1:10010/hello?name=Scott`. The Swagger spec file is edited with `$ swagger project edit`.
 
+### Editing the Swagger Spec
+
+Project port changed to `3000` and base route to `api/`, as per requirements. Test file copied over for easy ref. 
+
 
 
