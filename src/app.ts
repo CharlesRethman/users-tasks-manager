@@ -11,7 +11,7 @@ const app: express.Application = express();
 
 
 const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
-const dbName = 'usersTasks';
+const dbName = process.env.DATABASE || 'usersTasks';
 
 export default app; // for testing
 export const mongoDb: Promise<Db> = connectDb(url, dbName);

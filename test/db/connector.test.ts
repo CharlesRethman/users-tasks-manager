@@ -5,7 +5,7 @@ import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import { Db, MongoClient } from 'mongodb';
 
-import { connectDb } from '../../src/db/connect'
+import { connectDb } from '../../src/db/connector'
 import { mongoDb } from '../../src/app';
 
 chai.use(chaiAsPromised).should();

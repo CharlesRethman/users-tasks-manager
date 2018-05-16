@@ -39,7 +39,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "start": "node ./dist/app.js",
-    "test": "mocha --reporter spec --require ts-node/register 'test/**/*.test.ts'",
+    "test": "mocha -c --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
     "build": "gulp scripts"
   }
 }

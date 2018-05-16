@@ -25,7 +25,7 @@ const checkExists = dbOps.__get__('checkExists');
 describe('sequencer test', function() {
 
   it('should start at 1 as there are no records', function() {
-    return sequencer('users').should.eventually.equals(0);
+    return sequencer('buildings').should.eventually.equals(0);
   });
 
 });
@@ -33,7 +33,7 @@ describe('sequencer test', function() {
 describe('checkExists test', function() {
 
   it('should have an empty object', function() {
-    return checkExists('users', 100).should.eventually.equals(false);
+    return checkExists('buildings', 100).should.eventually.equals(false);
   })
 
 });
@@ -45,45 +45,45 @@ describe('Do CRUD', function() {
 
     it('should create documents', function(done) {
       it('should create first document', function() {
-        return create('users', testDocs[0]).should.eventually.have.property('result').deep.equals({ n: 1, ok: 1 });
+        return create('buildings', testDocs[0]).should.eventually.have.property('result').deep.equals({ n: 1, ok: 1 });
       });
       it('should create second document', function() {
-        return create('users', testDocs[1]).should.eventually.have.property('result').deep.equals({ n: 1, ok: 1 });
+        return create('buildings', testDocs[1]).should.eventually.have.property('result').deep.equals({ n: 1, ok: 1 });
       });
       done();
     });
 
     it('should get documents', function(done) {
       it('should get all documents', function() {
-        return getMany('users', {}, {}, {}).should.eventually.have.length(2);
+        return getMany('buildings', {}, {}, {}).should.eventually.have.length(2);
       });
       done();
     })
 
     it('should get a single document', function(done) {
       it('should get the first document', function() {
-        return getOne('users', '0').should.eventually.have.property('name').equals('John');
+        return getOne('buildings', '0').should.eventually.have.property('name').equals('John');
       });
       done();
     });
 
     it('should update documents', function(done) {
       it('should update the second document', function() {
-        return update('users', '1', { name: 'Dale Hurwitz' }).should.eventually.have.property('ops').have.property('name').deep.equals('Dale Hurwitz');
+        return update('buildings', '1', { name: 'Dale Hurwitz' }).should.eventually.have.property('ops').have.property('name').deep.equals('Dale Hurwitz');
       });
       done();
     })
 
     it('should delete a document', function(done) {
       it('should delete the second document', function() {
-        return deleteOne('users', '1').should.eventually.have.property('result').deep.equals({});
+        return deleteOne('buildings', '1').should.eventually.have.property('result').deep.equals({});
       });
       done();
     });
 
     it('should delete a document', function(done) {
       it('should delete the first document', function() {
-        return deleteOne('users', '0').should.eventually.have.property('result').deep.equals({});
+        return deleteOne('buildings', '0').should.eventually.have.property('result').deep.equals({});
       });
       done();
     });
