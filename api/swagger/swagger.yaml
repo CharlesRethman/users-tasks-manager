@@ -283,7 +283,7 @@ definitions:
         - id
         properties:
           id:
-            type: integer
+            type: string
           username:
             type: string
       - $ref: '#/definitions/UserNames'
@@ -316,7 +316,7 @@ definitions:
         - date_time
         properties:
           id:
-            type: number
+            type: string
           status:
             type: string
             default: "pending"
@@ -352,7 +352,9 @@ definitions:
     type: object
     properties:
       id:
-        type: number
+        type: string
+      collection:
+        type: string
       action:
         type: string
         enum:
