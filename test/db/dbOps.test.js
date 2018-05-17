@@ -30,7 +30,7 @@ const checkExists = dbOpsFuncs.__get__('checkExists');
 describe('sequencer test', function() {
 
   it('should start at 1 as there are no records', function() {
-    return sequencer('buildings').should.eventually.equals(0);
+    return sequencer('users').should.eventually.equals(0);
   });
 
 });
@@ -38,7 +38,7 @@ describe('sequencer test', function() {
 describe('checkExists test', function() {
 
   it('should have an empty object', function() {
-    return checkExists('buildings', 100).should.eventually.equals(false);
+    return checkExists('users', 100).should.eventually.equals(false);
   })
 
 });
@@ -50,12 +50,12 @@ describe('do database CRUD', function() {
 
     it('should create documents', function(done) {
       it('should create first document', function() {
-        return dbOps.create('buildings', testDocs[0])
+        return dbOps.create('users', testDocs[0])
           .should.eventually.have.property('result')
           .deep.equals({ n: 1, ok: 1 });
       });
       it('should create second document', function() {
-        return dbOps.create('buildings', testDocs[1])
+        return dbOps.create('users', testDocs[1])
           .should.eventually.have.property('result')
           .deep.equals({ n: 1, ok: 1 });
       });
@@ -68,7 +68,7 @@ describe('do database CRUD', function() {
 
     it('should find documents', function(done) {
       it('should find all documents', function() {
-        return dbOps.getMany('buildings', {}, {}, {})
+        return dbOps.getMany('users', {}, {}, {})
           .should.eventually.have.length(2);
       });
       done();
@@ -76,7 +76,7 @@ describe('do database CRUD', function() {
 
     it('should find a single document', function(done) {
       it('should find the first document', function() {
-        return dbOps.getOne('buildings', '0')
+        return dbOps.getOne('users', '0')
           .should.eventually.have.property('name')
           .equals('John');
       });
@@ -89,7 +89,7 @@ describe('do database CRUD', function() {
 
     it('should update documents', function(done) {
       it('should update the second document', function() {
-        return dbOps.update('buildings', '1', { name: 'Dale Hurwitz' }).should.eventually.have.property('ops')
+        return dbOps.update('users', '1', { name: 'Dale Hurwitz' }).should.eventually.have.property('ops')
           .have.property('name')
           .deep.equals('Dale Hurwitz');
       });
@@ -102,7 +102,7 @@ describe('do database CRUD', function() {
 
     it('should delete a document', function(done) {
       it('should delete the second document', function() {
-        return dbOps.deleteOne('buildings', '1')
+        return dbOps.deleteOne('users', '1')
           .should.eventually.have.property('result')
           .deep.equals({});
       });
@@ -111,7 +111,7 @@ describe('do database CRUD', function() {
 
     it('should delete a document', function(done) {
       it('should delete the first document', function() {
-        return dbOps.deleteOne('buildings', '0')
+        return dbOps.deleteOne('users', '0')
           .should.eventually.have.property('result')
           .deep.equals({});
       });

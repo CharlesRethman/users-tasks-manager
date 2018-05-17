@@ -1,0 +1,27 @@
+[
+  {
+    "username": "marlon@thegodfather.net",
+    "first_name": "Marlon",
+    "last_name": "Brando"
+  },
+  {
+    "username": "js@tadcaster.brew",
+    "first_name": "John",
+    "last_name": "Smith"
+  },
+  {
+    "username": "pretty@woman.com",
+    "first_name": "Julia",
+    "last_name": "Roberts"
+  },
+  {
+    "username": "jd@doe.ray.me",
+    "first_name": "James",
+    "last_name": "Doe"
+  },
+  {
+    "username": "jd2000@doe.ray.me",
+    "first_name": "Jane",
+    "last_name": "Doe"
+  }
+]
