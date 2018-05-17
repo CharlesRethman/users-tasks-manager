@@ -59,5 +59,4 @@ export async function listAllUsers (req, res, next): Promise<void> {
 
   }
 
-  next();
 }

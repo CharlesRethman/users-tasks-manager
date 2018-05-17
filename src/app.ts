@@ -9,7 +9,7 @@ import { connectDb } from './db/connector';
 
 const app: express.Application = express();
 
-console.log('app.length', app.length);
+//console.log('app.length', app.length);
 
 
 const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
@@ -24,13 +24,13 @@ const config: SwaggerExpress.Config = {
   appRoot: appRoot  // required config
 };
 
-let server: number = 0
+//let server: number = 0
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   if (err) { throw err; }
 
-  console.log(server);
+//  console.log(server);
 
   // install middleware
   swaggerExpress.register(app);
@@ -38,7 +38,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   const port = process.env.PORT || 3000;
   app.listen(port);
 
-  server++
+//  server++
 
   if (swaggerExpress.runner.swagger.paths['/hello']) {
     console.log('try this:\ncurl http://127.0.0.1:' + port + '/api/hello?name=Scott');

@@ -44,9 +44,9 @@ describe('checkExists test', function() {
 });
 
 
-describe('Do CRUD', function() {
+describe('do database CRUD', function() {
 
-  describe('Create documents', function() {
+  describe('create documents', function() {
 
     it('should create documents', function(done) {
       it('should create first document', function() {
@@ -62,22 +62,30 @@ describe('Do CRUD', function() {
       done();
     });
 
-    it('should get documents', function(done) {
-      it('should get all documents', function() {
+  });
+
+  describe('find documents', function() {
+
+    it('should find documents', function(done) {
+      it('should find all documents', function() {
         return dbOps.getMany('buildings', {}, {}, {})
           .should.eventually.have.length(2);
       });
       done();
     })
 
-    it('should get a single document', function(done) {
-      it('should get the first document', function() {
+    it('should find a single document', function(done) {
+      it('should find the first document', function() {
         return dbOps.getOne('buildings', '0')
           .should.eventually.have.property('name')
           .equals('John');
       });
       done();
     });
+  
+  });
+
+  describe('update documents', function() {
 
     it('should update documents', function(done) {
       it('should update the second document', function() {
@@ -86,7 +94,11 @@ describe('Do CRUD', function() {
           .deep.equals('Dale Hurwitz');
       });
       done();
-    })
+    });
+
+  });
+
+  describe('delete documents', function() {
 
     it('should delete a document', function(done) {
       it('should delete the second document', function() {
