@@ -11,7 +11,7 @@ const expect = chai.expect;
 let id0 = 'empty';
 let id1 = 'empty';
 
-describe('do database CRUD', function() {
+describe('`db/ops.ts` tests. Database CRUD', function() {
 
   describe('create documents', function() {
 

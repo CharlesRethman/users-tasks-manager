@@ -10,9 +10,9 @@ const expect = chai.expect;
 const dbName = process.env.DATABASE || 'testUsersTasks'
 
 
-describe('test (db) connector function', function() {
+describe('`db/connector.ts` tests', function() {
 
-  let db;
+  describe('test (db) connector function', function() {
 
     it('should get the db', async function() {
       try {
@@ -26,18 +26,20 @@ describe('test (db) connector function', function() {
       }
     });
 
-});
+  });
 
-describe('test connection on app is working', function() {
+  describe('test connection on app is working', function() {
 
-  it('should get a connection object for the app', async function() {
-    try {
-      const res = (await mongoDb).db;
-      expect(res.databaseName).to.equal('usersTasks');
-      return Promise.resolve();
-    } catch (e) {
-      return Promise.reject(e);
-    }
+    it('should get a connection object for the app', async function() {
+      try {
+        const res = (await mongoDb).db;
+        expect(res.databaseName).to.equal('usersTasks');
+        return Promise.resolve();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    });
+
   });
 
 });
