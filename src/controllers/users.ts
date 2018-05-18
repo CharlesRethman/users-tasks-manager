@@ -6,7 +6,7 @@ import {
   getOne,
   update,
   deleteOne
-} from '../db/dbOps';
+} from '../db/ops';
 
 
 

@@ -356,7 +356,7 @@ definitions:
       action:
         type: string
         enum:
-          - Deleted
+          - deleted
   HelloWorldResponse:
     required:
       - message

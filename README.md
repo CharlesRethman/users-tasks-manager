@@ -62,3 +62,12 @@ CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in dire
 The testing creates a collection of 'users' in MongoDB, which are all deleted (empty collection remains).
 
 ### 5. Develop Unit Tests and Write the Code for the Controllers
+
+> Label: develop-tests-and-code-for-controllers
+
+_Major Changes to Stages 2 and 4 here_: 
+- Changed the `id` field to be based on the MongoDB `_id` field, not a auto-incrementing number. This necessitates converting the ObjectID type from the database into a 24-character string for the API body and converting strings in `id` of queries to ObjectIDs for querying the database. These two functions, plus the data-checker, will be placed in a separate module in the `db/` directory.
+- Mocha test files in the `test/` directory converted to JavaScript (like the GulpFile). This is due to an issue with the ts-node compiler, which, togther with Mocha, seems to start the server twice, causing a port error.
+- `dbOps.ts` and `db.Opa.test.ts` also renamed to `ops.ts` and `ops.test.ts` (they are in the `db/` directory). Only one 'users' in db CRDU test is deleted, the other remains.
+
+Controller tests in `test/controllers/users.test.js

@@ -6,7 +6,7 @@ const JSON_FILES = ['src/*.json', 'src/**/*.json'];
 
 // pull in the project TypeScript config
 const tsProject = ts.createProject('./tsconfig.json');
-console.log(tsProject);
+//console.log(tsProject);
 
 gulp.task('scripts', () => {
   const tsResult = tsProject.src()
