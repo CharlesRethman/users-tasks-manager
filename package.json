@@ -39,7 +39,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "start": "node ./dist/app.js",
-    "test": "mocha -C --reporter spec 'test/db/*.test.js' 'test/controllers/*.test.js'",
+    "test": "mocha -C --reporter spec 'test/db/*.test.js'",
     "build": "gulp scripts"
   }
 }

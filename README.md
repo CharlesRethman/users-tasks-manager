@@ -12,6 +12,7 @@ The project was regularly committed and the main commits have been tagged, this 
 1. Develop the Swagger specification and test with mocks on the Swagger Editor
 1. Re-organise and simplify the directory structure, adding in the gulpfile and typescript config files, as well as the Typescript `src/` directory and the dbHandlers and workers directories (for the scheduler).
 1. Develop unit tests and write the code for the base db modules: the connector and db CRUD operations
+1. Logging and environment configs
 1. Develop unit tests and write the code for the controllers
 1. Develop unit tests and write the code for the workers (scheduler)
 1. Develop e2e tests, based on the provided `curl` commands, as well as local tests in the appropriate controllers
@@ -55,19 +56,17 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 > Label: develop-tests-and-code-for-db
 
+> _Major Change to Stage 2 here_: 
+>  - Changed the API `id` field to use the MongoDB `_id` field, not an auto-incrementing number. This means that the ObjectID type from the database must be converted into a 24-character string and the field name is changed from `_id` to `id`. The function for handling this, plus a `documentExists()` checker, are placed in a separate `helper.ts` module in the `db/` directory.
+
 `connector.test.ts` and `connector.ts` module in directory `db/`.
 
 CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in directory `db/`.
 
 The testing creates a collection of 'users' in MongoDB, which are all deleted (empty collection remains).
 
-### 5. Develop Unit Tests and Write the Code for the Controllers
+Mocha test files in the `test/` directory were converted to JavaScript (like the GulpFile). This is due to an issue I had with the 'ts-node' compiler library, which, together with Mocha, seemed to start the server twice, causing a port error.
+`dbOps.ts` and `db.Opa.test.ts` were renamed to `ops.ts` and `ops.test.ts`, respectivley (they are in the `db/` directory).
 
-> Label: develop-tests-and-code-for-controllers
+Only one user from the 'users' collection is deleted in the db-CRUD tests, the other user remains.
 
-_Major Changes to Stages 2 and 4 here_: 
-- Changed the `id` field to be based on the MongoDB `_id` field, not a auto-incrementing number. This necessitates converting the ObjectID type from the database into a 24-character string for the API body and converting strings in `id` of queries to ObjectIDs for querying the database. These two functions, plus the data-checker, will be placed in a separate module in the `db/` directory.
-- Mocha test files in the `test/` directory converted to JavaScript (like the GulpFile). This is due to an issue with the ts-node compiler, which, togther with Mocha, seems to start the server twice, causing a port error.
-- `dbOps.ts` and `db.Opa.test.ts` also renamed to `ops.ts` and `ops.test.ts` (they are in the `db/` directory). Only one 'users' in db CRDU test is deleted, the other remains.
-
-Controller tests in `test/controllers/users.test.js

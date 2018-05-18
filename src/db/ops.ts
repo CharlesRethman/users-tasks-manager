@@ -23,8 +23,6 @@ export async function create(col, doc) {
       .collection(col)
       .insertOne(doc);
 
-//    console.log('called \'createOne\', returned result.ok =', res.result.ok);
-//    console.log('result document', objectIdToString(res.ops['0']));
     return objectIdToString(res.ops['0']);
 
   } catch(e) {
@@ -64,8 +62,6 @@ export async function getOne(col, id: string) {
 
     const db: Db = await mongoDb;
 
-//    console.log('getOne: ObjectID =', new Object(id));
-
     const result: any = await db
       .collection(col)
       .findOne({ _id: new ObjectID(id) });
@@ -96,7 +92,7 @@ export async function update(col: string, id: string, doc) {
     const newRes: any = await db
       .collection(col)
       .findOne({ _id: new ObjectID(id) });
-      
+
     return newRes === null ? newRes : objectIdToString(newRes);
 
   } catch(e) {
@@ -115,8 +111,6 @@ export async function deleteOne(col: string, id: string) {
     const db: Db = await mongoDb;
 
     expect(await checkExists(col, id), 'Existing record not found').is.true;
-
-    console.log('ObjectId =', new ObjectID(id));
 
     const res: DeleteWriteOpResultObject = await db
       .collection(col)
