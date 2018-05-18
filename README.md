@@ -72,6 +72,8 @@ Only one user from the 'users' collection is deleted in the db-CRUD tests, the o
 
 ### 5. Logging and environment configs
 
+> label: logging-and-environment-configs
+
 Using the 'config' library with three config files (default, dev and test) to choose configurations according to the  environment. Testing in a `test` environment (`NODE_ENV`), and uses a different database from running.
 
 Logging done by `Morgan`, a popular and common library, which is disabled during testing.
