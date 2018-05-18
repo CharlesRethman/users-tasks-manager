@@ -4,8 +4,7 @@ import {
   create,
   getMany,
   getOne,
-  update,
-  deleteOne
+  update
 } from '../db/ops';
 
 
@@ -37,12 +36,11 @@ export async function createUser(req, res, next): Promise<void> {
 }
 
 
-export async function listAllUsers (req, res, next): Promise<void> {
+export async function listAllUsers(req, res, next): Promise<void> {
 
   try {
 
-    const docs: any[] = await getMany('users', {}, {}, {})
-//    const body: any = [ {_id: 'asd', username: 'a', first_name: 'b', last_name: 'c' } ];
+    const docs: any[] = await getMany('users', {}, {}, {});
     res
       .status(200)
       .type('application/json')
@@ -58,6 +56,58 @@ export async function listAllUsers (req, res, next): Promise<void> {
       .json(e)
       .end();
 
+  }
+
+}
+
+
+export async function getUserInfo(req, res, next): Promise<void> {
+
+  try {
+
+    const doc: any = await getOne('users', req.swagger.params.id.value);
+    res
+      .status(200)
+      .type('application/json')
+      .json(doc)
+      .end();
+
+  } catch(e) {
+
+    //logger
+    res
+      .status(404)
+      .type('application/json')
+      .json(e)
+      .end();
+
+  }
+}
+
+
+export async function updateUser(req, res, next): Promise<void> {
+
+  try {
+
+    const doc: any = await update(
+      'users', 
+      req.swagger.params.id.value, 
+      req.swagger.params.user.value
+    );
+    res
+      .status(200)
+      .type('application/json')
+      .json(doc)
+      .end();
+
+  } catch(e) {
+
+    //logger
+    res
+      .status(404)
+      .type('application/json')
+      .json(e)
+      .end();
   }
 
 }

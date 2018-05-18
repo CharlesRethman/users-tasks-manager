@@ -14,6 +14,8 @@ const expect = chai.expect;
 
 describe('`controllers/users.ts` tests. API requests', function() {
 
+  let id = 'empty';
+
   describe('#POST 3 users', function() {
 
     usersTest.forEach((e, i) => {
@@ -29,7 +31,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
             expect(res).to.have.status(200);
             expect(res).to.be.json;
             expect(res.body).to.deep.equal(Object.assign({}, usersTest[i], { id: res.body.id }));
-            Promise.resolve();
+            return Promise.resolve();
           } catch(e) {
             return Promise.reject(e);
           }
@@ -38,22 +40,67 @@ describe('`controllers/users.ts` tests. API requests', function() {
       }
     });
 
-});
+  });
 
   describe('#GET users', function() {
 
     it('should get all users', async function() {
       try {
-        const res = await chai.request(app).get('/api/users');
-//        console.log('\nresponse body =', res.body);
+        const res = await chai
+          .request(app)
+          .get('/api/users');
         expect(res).to.have.status(200);
         expect(res.body).to.have.length(4);
-        Promise.resolve();
+        id = res.body[1].id;
+        return Promise.resolve();
       } catch(e) {
         return Promise.reject(e);
       }
     });
 
   });
+
+  describe('#GET a user', function() {
+
+    it('should get a user', async function() {
+      try {
+        const res = await chai
+          .request(app)
+          .get('/api/users/' + id);
+//        console.log(Object.assign({}, usersTest[2], { id: id }));
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal(Object.assign({}, usersTest[2], { id: id }));
+        return Promise.resolve();
+      } catch(e) {
+        return Promise.reject(e);
+      }
+    });
+
+  });
+
+  describe('#UPDATE a user', function() {
+
+    it('should update a user', async function() {
+      try {
+        const res = await chai
+          .request(app)
+          .put('/api/users/' + id)
+          .type('application/json')
+          .send({ first_name: 'Meghan', last_name: 'Markle' });
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal({
+          username: 'pretty@woman.com',
+          first_name: 'Meghan',
+          last_name: 'Markle',
+          id: id
+        });
+        return Promise.resolve();
+      } catch(e) {
+        return Promise.reject(e);
+      }
+    });
+
+  });
+
 
 });

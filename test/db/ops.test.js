@@ -18,9 +18,9 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
         const docs = await ops.getMany('users', {}, {}, {});
         const del = await ops.deleteAll('users');
         expect(docs).to.have.length(del.n);
-        Promise.resolve();
+        return Promise.resolve();
       } catch(e) {
-        Promise.reject(e);
+        return Promise.reject(e);
       }
   });
 

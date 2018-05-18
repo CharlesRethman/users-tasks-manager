@@ -132,6 +132,8 @@ export async function deleteOne(col: string, id: string) {
 
 }
 
+
+// Only used for clearing data in the tests (not routed)
 export async function deleteAll(col: string) {
 
   try {
