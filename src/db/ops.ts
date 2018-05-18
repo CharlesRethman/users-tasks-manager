@@ -18,7 +18,7 @@ export async function create(col, doc) {
 
   try {
 
-    const db: Db = await mongoDb;
+    const db: Db = (await mongoDb).db;
     const res: WriteOpResult = await db
       .collection(col)
       .insertOne(doc);
@@ -38,7 +38,7 @@ export async function getMany(col, query, projection, sort) {
 
   try {
 
-    const db: Db = await mongoDb;
+    const db: Db = (await mongoDb).db;
 
     const results: any[] = await db
       .collection(col)
@@ -60,7 +60,7 @@ export async function getOne(col, id: string) {
 
   try {
 
-    const db: Db = await mongoDb;
+    const db: Db = (await mongoDb).db;
 
     const result: any = await db
       .collection(col)
@@ -80,7 +80,7 @@ export async function update(col: string, id: string, doc) {
 
   try {
 
-    const db: Db = await mongoDb;
+    const db: Db = (await mongoDb).db;
 
     expect(await checkExists(col, id), 'Existing record not found').is.true;
 
@@ -108,7 +108,7 @@ export async function deleteOne(col: string, id: string) {
 
   try {
 
-    const db: Db = await mongoDb;
+    const db: Db = (await mongoDb).db;
 
     expect(await checkExists(col, id), 'Existing record not found').is.true;
 

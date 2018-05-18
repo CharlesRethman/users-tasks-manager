@@ -2,12 +2,20 @@
 
 import { Db, MongoClient, MongoClientOptions } from 'mongodb';
 
-export async function connectDb(uri: string, dbName: string): Promise<Db> {
+export interface DbClient {
+  db: Db,
+  client: MongoClient
+}
+
+export async function connectDb(uri: string, dbName: string): Promise<DbClient> {
 
   try {
 
     const client = await MongoClient.connect(uri);
-    return client.db(dbName);
+    return {
+      client: client,
+      db: await client.db(dbName)
+    };
 
   } catch(e) {
 

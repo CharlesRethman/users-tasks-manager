@@ -2,9 +2,8 @@
 
 import * as SwaggerExpress from 'swagger-express-mw';
 import * as express from 'express';
-import { Db } from 'mongodb';
 
-import { connectDb } from './db/connector';
+import { connectDb, DbClient } from './db/connector';
 
 
 const app: express.Application = express();
@@ -14,7 +13,7 @@ const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
 const dbName = process.env.DATABASE || 'usersTasks';
 
 export default app; // for testing
-export const mongoDb: Promise<Db> = connectDb(url, dbName);
+export const mongoDb: Promise<DbClient> = connectDb(url, dbName);
 
 const appRoot = __dirname.substring(0, __dirname.indexOf('users-tasks-manager') + 19)
   
