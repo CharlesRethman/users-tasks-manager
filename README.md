@@ -59,7 +59,7 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 > _Major Change to Stage 2 here_: 
 >  - Changed the API `id` field to use the MongoDB `_id` field, not an auto-incrementing number. This means that the ObjectID type from the database must be converted into a 24-character string and the field name is changed from `_id` to `id`. The function for handling this, plus a `documentExists()` checker, are placed in a separate `helper.ts` module in the `db/` directory.
 
-`connector.test.ts` and `connector.ts` module in directory `db/`.
+`connector.test.ts` and `connector.ts` module in directory `db/`. The MongoDB Nodejs client library has changed from v 2 to v 3 in that the `connect()` method no longer returns a Db instance; it now returns a MongoClient instance from which the db is accessed.
 
 CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in directory `db/`.
 
