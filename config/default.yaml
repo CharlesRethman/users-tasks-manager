@@ -35,3 +35,6 @@ swagger:
       name: swagger_raw
 
 # any other values in this file are just loaded into the config for application access...
+
+mongo_url: mongodb://localhost:3000
+database: usersTasks

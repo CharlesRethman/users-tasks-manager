@@ -33,7 +33,7 @@ describe('`db/connector.ts` tests', function() {
     it('should get a connection object for the app', async function() {
       try {
         const res = (await mongoDb).db;
-        expect(res.databaseName).to.equal('usersTasks');
+        expect(res.databaseName).to.equal('testUsersTasks');
         return Promise.resolve();
       } catch (e) {
         return Promise.reject(e);

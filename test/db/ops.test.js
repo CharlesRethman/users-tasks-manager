@@ -13,6 +13,17 @@ let id1 = 'empty';
 
 describe('`db/ops.ts` tests. Database CRUD', function() {
 
+  before(async function() {
+      try {
+        const docs = await ops.getMany('users', {}, {}, {});
+        const del = await ops.deleteAll('users');
+        expect(docs).to.have.length(del.n);
+        Promise.resolve();
+      } catch(e) {
+        Promise.reject(e);
+      }
+  });
+
   describe('create documents', function() {
 
       it('should create first document', async function() {

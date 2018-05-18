@@ -1,30 +1,36 @@
 'use strict';
 
-import * as SwaggerExpress from 'swagger-express-mw';
+import * as config from 'config';
 import * as express from 'express';
+import * as morgan from 'morgan';
+import * as SwaggerExpress from 'swagger-express-mw';
 
 import { connectDb, DbClient } from './db/connector';
 
-
 const app: express.Application = express();
-
-
-const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
-const dbName = process.env.DATABASE || 'usersTasks';
-
 export default app; // for testing
+
+console.log('environment: NODE_ENV =', process.env.NODE_ENV);
+console.log('Mongo connection parameters =', config.mongoUrl, config.database);
+const url = config.mongoUrl || 'mongodb://localhost:27017';
+const dbName = config.database || 'usersTasks';
+
 export const mongoDb: Promise<DbClient> = connectDb(url, dbName);
 
 const appRoot = __dirname.substring(0, __dirname.indexOf('users-tasks-manager') + 19)
   
-const config: SwaggerExpress.Config = {
+const swaggerConfig: SwaggerExpress.Config = {
   appRoot: appRoot  // required config
 };
 
-SwaggerExpress.create(config, function(err, swaggerExpress) {
+SwaggerExpress.create(swaggerConfig, function(err, swaggerExpress) {
 
   if (err) { throw err; }
 
+  if(config.util.getEnv('NODE_ENV') !== 'test') {
+    app.use(morgan('combined'));
+  }
+  
   // install middleware
   swaggerExpress.register(app);
 

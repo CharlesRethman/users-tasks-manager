@@ -131,3 +131,22 @@ export async function deleteOne(col: string, id: string) {
   }
 
 }
+
+export async function deleteAll(col: string) {
+
+  try {
+
+    const db: Db = (await mongoDb).db;
+
+    const res: DeleteWriteOpResultObject = await db
+      .collection(col)
+      .deleteMany({})
+
+    return res.result;
+
+  } catch(e) {
+
+    return Promise.reject(e);
+    
+  }
+}
