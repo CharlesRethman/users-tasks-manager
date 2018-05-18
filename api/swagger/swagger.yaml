@@ -52,7 +52,7 @@ paths:
           schema:
             $ref: '#/definitions/UserDetails'
       responses:
-        '201':
+        '200':
           description: User created
           schema:
             $ref: '#/definitions/User'
@@ -280,7 +280,8 @@ definitions:
     allOf:
       - type: object
         required:
-        - id
+          - id
+          - username
         properties:
           id:
             type: string
@@ -351,14 +352,14 @@ definitions:
   Deleted:
     type: object
     properties:
-      id:
-        type: string
       collection:
+        type: string
+      id:
         type: string
       action:
         type: string
         enum:
-          - deleted
+          - Deleted
   HelloWorldResponse:
     required:
       - message

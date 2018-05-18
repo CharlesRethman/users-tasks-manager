@@ -8,10 +8,9 @@ import * as SwaggerExpress from 'swagger-express-mw';
 import { connectDb, DbClient } from './db/connector';
 
 const app: express.Application = express();
-export default app; // for testing
 
-console.log('environment: NODE_ENV =', process.env.NODE_ENV);
-console.log('Mongo connection parameters =', config.mongoUrl, config.database);
+//console.log('environment: NODE_ENV =', process.env.NODE_ENV);
+//console.log('Mongo connection parameters =', config.mongoUrl, config.database);
 const url = config.mongoUrl || 'mongodb://localhost:27017';
 const dbName = config.database || 'usersTasks';
 
@@ -44,3 +43,4 @@ SwaggerExpress.create(swaggerConfig, function(err, swaggerExpress) {
 });
 
 
+export default app;

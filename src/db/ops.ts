@@ -10,7 +10,7 @@ import {
   UpdateWriteOpResult
 } from 'mongodb';
 
-import { checkExists, objectIdToString } from './helpers';
+import { documentExists, objectIdToString } from './helpers';
 import { mongoDb } from '../app';
 
 
@@ -82,7 +82,7 @@ export async function update(col: string, id: string, doc) {
 
     const db: Db = (await mongoDb).db;
 
-    expect(await checkExists(col, id), 'Existing record not found').is.true;
+    expect(await documentExists(col, id), 'Existing record not found').is.true;
 
     const res: UpdateWriteOpResult = await db
       .collection(col)
@@ -110,7 +110,7 @@ export async function deleteOne(col: string, id: string) {
 
     const db: Db = (await mongoDb).db;
 
-    expect(await checkExists(col, id), 'Existing record not found').is.true;
+    expect(await documentExists(col, id), 'Existing record not found').is.true;
 
     const res: DeleteWriteOpResultObject = await db
       .collection(col)
@@ -147,6 +147,6 @@ export async function deleteAll(col: string) {
   } catch(e) {
 
     return Promise.reject(e);
-    
+
   }
 }

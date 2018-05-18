@@ -46,7 +46,7 @@ describe('`db/helper.ts` tests', function() {
 
     it('should have an empty object', async function() {
       try {
-        const res = await helpers.checkExists('users', 'FFFFFFFFF000AAACCC222444');
+        const res = await helpers.documentExists('users', 'FFFFFFFFF000AAACCC222444');
         expect(res).to.equal(false);
         return Promise.resolve();
       } catch(e) {
