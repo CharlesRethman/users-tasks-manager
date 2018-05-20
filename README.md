@@ -63,7 +63,7 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in directory `db/`.
 
-The testing creates a collection of 'users' in MongoDB, all but one of which are deleted (one document remains).
+The testing creates a collection of 'users' in the test database ('testUsersTasks') in MongoDB, all but one of which are deleted (one document remains).
 
 Mocha test files in the `test/` directory were converted to JavaScript (like the GulpFile). This is due to an issue I had with the 'ts-node' compiler library, which, together with Mocha, seemed to start the server twice, causing a port error.
 `dbOps.ts` and `db.Opa.test.ts` were renamed to `ops.ts` and `ops.test.ts`, respectivley (they are in the `db/` directory).
@@ -83,3 +83,7 @@ Logging done by `Morgan`, a popular and common library, which is disabled during
 > Label: develop-tests-and-code-for-controllers
 
 `users.test.js` And `tasks.test.js` developed with `users.ts` and `tasks.ts` for users and tasks controllers, respectively. Tests are run off a fake data set stored in `testUsers.json` and `testTasks.json`.
+
+The data are created and amended in the test database, one task of which is deleted by the tests. The environment variable, `CLEAN_TEST`, determines if all data are cleaned out at the end of the test. This variable needs to be set to 'true', 'yes', 't' or 'y' (case insensitive) for this to happen -- any other value will leave the data in after the test.
+
+To test the routing properly, the test checks the GET-all-user-tasks call for _each_ user. The struture of the test logic dictates that these calls are made at the end of the tasks suite.

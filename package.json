@@ -42,7 +42,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "start": "node ./dist/app.js",
-    "test": "export NODE_ENV=test && mocha -C --reporter spec --exit 'test/db/*.test.js' 'test/controllers/users.test.js' 'test/controllers/tasks.test.js'",
+    "test": "export NODE_ENV=test && export CLEAN_TEST=true && mocha -C --reporter spec --exit 'test/db/*.test.js' 'test/controllers/users.test.js' 'test/controllers/tasks.test.js'",
     "build": "gulp scripts"
   }
 }

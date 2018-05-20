@@ -75,6 +75,19 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
 
       describe('testing #GET all tasks on each user', function() {
 
+
+        after(async function() {
+          try {
+            if(process.env.CLEAN_TEST && ['true', 'yes', 'y', 't'].includes(process.env.CLEAN_TEST.toLowerCase())) {
+              await ops.deleteAll('tasks');
+              await ops.deleteAll('users');
+            }
+            return Promise.resolve();
+          } catch(e) {
+            return Promise.reject(e);
+          }
+        });
+
         users.forEach((user, i) => {
 
           it('should get ' + taskCounts[i] + ' tasks for user id = ' + user, async function() {
