@@ -28,7 +28,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
               .post('/api/users')
               .type('application/json')
               .send(usersTest[i]);
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(201);
             expect(res).to.be.json;
             expect(res.body).to.deep.equal(Object.assign({}, usersTest[i], { id: res.body.id }));
             return Promise.resolve();

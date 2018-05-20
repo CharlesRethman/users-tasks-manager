@@ -15,8 +15,8 @@ const expect = chai.expect;
 
 describe('`controllers/tasks.ts` tests. API requests', function() {
 
-  let id; // variable to hold a tasks id for the 'GET all' request
-  const taskCounts = [0, 2, 2, 0]; // expected task counts for each user
+  let task_id; // variable to hold a task's id for the 'GET all' request
+  const taskCounts = [0, 1, 2, 0]; // expected task counts for each user, after deletion
   
   before(async function() {
     try {
@@ -43,16 +43,15 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
     tasksTest.forEach((e, i) => {
 
       it('should create a task ' + i, async function() {
-        const users = await getUsers();
-//        console.log('it #POST: users =', users);
-        const user = i < 2 ? users[1] : users[2];
         try {
+          const users = await getUsers();
+          const user = i < 2 ? users[1] : users[2];
           const res = await chai
             .request(app)
             .post('/api/users/' + user + '/tasks')
             .type('application/json')
             .send(tasksTest[i]);
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(201);
           expect(res).to.be.json;
           expect(res.body).to.deep.equal(Object.assign(
             {},
@@ -96,25 +95,24 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
       });
 
       const tasks = await ops.getMany('tasks', { user_id: users[1] }, {}, {});
-      id = tasks[1].id;
-      console.log('#GET all tasks: id =', id);
+      task_id = tasks[1].id;
     });
 
   });
 
   describe('#GET one task', function() {
 
-    it('should get a user', async function() {
+    it('should get a task', async function() {
       try {
         const users = await getUsers();
         const res = await chai
           .request(app)
-          .get('/api/users/' + users[1] + '/tasks/' + id);
+          .get('/api/users/' + users[1] + '/tasks/' + task_id);
         expect(res).to.have.status(200);
         expect(res.body).to.deep.equal(Object.assign(
           {},
           tasksTest[1],
-          { user_id: users[1], id: id }
+          { user_id: users[1], id: task_id }
         ));
         return Promise.resolve();
       } catch(e) {
@@ -124,35 +122,55 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
 
   });
 
-    describe.skip('#UPDATE a task', function() {
+  describe('#UPDATE one task', function() {
 
-      it('should update a user', async function() {
-        try {
-          const res = await chai
-            .request(app)
-            .put('/api/users/' + user_id)
-            .type('application/json')
-            .send({ first_name: 'Meghan', last_name: 'Markle' });
-          expect(res).to.have.status(200);
-          expect(res.body).to.deep.equal({
-            username: 'pretty@woman.com',
-            first_name: 'Meghan',
-            last_name: 'Markle',
-            id: id
-          });
-          return Promise.resolve();
-        } catch(e) {
-          return Promise.reject(e);
-        }
-      });
-
+    it('should update a task', async function() {
+      try {
+        const users = await getUsers();
+        const res = await chai
+          .request(app)
+          .put('/api/users/' + users[1] + '/tasks/' + task_id)
+          .type('application/json')
+          .send({ name: 'serious task' });
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal({
+          name: 'serious task',
+          description: 'A waste of time',
+          date_time: '2018-05-17T06:40:38Z',
+          user_id: users[1],
+          id: task_id
+        });
+        return Promise.resolve();
+      } catch(e) {
+        return Promise.reject(e);
+      }
     });
 
-    describe.skip('#DELETE a task', function() {
+  });
 
-      it('should delete a task');
+  describe('#DELETE a task', function() {
 
+    it('should delete a task', async function() {
+      try {
+        const users = await getUsers();
+        const res = await chai
+          .request(app)
+          .delete('/api/users/' + users[1] + '/tasks/' + task_id)
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal({
+          collection: 'tasks',
+          id: task_id,
+          action: 'deleted'
+        });
+        const tasks = await ops.getMany('tasks', {}, {}, {}); // all tasks remaining in DB
+        expect(tasks).to.have.length(3);
+        return Promise.resolve();
+      } catch(e) {
+        return Promise.reject(e);
+      }
     });
 
-    
+  });
+
+
 });

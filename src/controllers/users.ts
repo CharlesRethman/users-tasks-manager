@@ -17,7 +17,7 @@ export async function createUser(req, res, next): Promise<void> {
     const doc: any = await create('users', req.swagger.params.user.value);
 //    console.log('users.ts: response =', doc);
     res
-      .status(200)
+      .status(201)
       .type('application/json')
       .json(doc)
       .end()
@@ -91,7 +91,8 @@ export async function updateUser(req, res, next): Promise<void> {
 
     const doc: any = await update(
       'users', 
-      req.swagger.params.id.value, 
+      req.swagger.params.id.value,
+      {},
       req.swagger.params.user.value
     );
     res

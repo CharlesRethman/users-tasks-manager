@@ -56,15 +56,16 @@ export async function getMany(col, query, projection, sort) {
 }
 
 
-export async function getOne(col, id: string, query: any, projection: any) {
+export async function getOne(col, id: string, otherQueryParams: any, projection: any) {
 
   try {
 
     const db: Db = (await mongoDb).db;
 
+    const opQuery = Object.assign({ _id: new ObjectID(id) }, otherQueryParams);
     const result: any = await db
       .collection(col)
-      .findOne(Object.assign(query, { _id: new ObjectID(id) }));
+      .findOne(opQuery);
     
     return result === null ? result : objectIdToString(result);
 
@@ -76,7 +77,7 @@ export async function getOne(col, id: string, query: any, projection: any) {
 }
 
 
-export async function update(col: string, id: string, doc) {
+export async function update(col: string, id: string, otherQueryParams: any, doc) {
 
   try {
 
@@ -84,9 +85,10 @@ export async function update(col: string, id: string, doc) {
 
     expect(await documentExists(col, id), 'Existing record not found').is.true;
 
+    const opQuery = Object.assign({ _id: new ObjectID(id) }, otherQueryParams);
     const res: UpdateWriteOpResult = await db
       .collection(col)
-      .updateOne({ _id: new ObjectID(id) }, { $set: doc });
+      .updateOne(opQuery, { $set: doc });
     expect(res.result.ok, 'update failed').eqls(1);
     
     const newRes: any = await db
@@ -104,7 +106,7 @@ export async function update(col: string, id: string, doc) {
 }
 
 
-export async function deleteOne(col: string, id: string) {
+export async function deleteOne(col: string, id: string, otherQueryParams: any) {
 
   try {
 
@@ -112,9 +114,10 @@ export async function deleteOne(col: string, id: string) {
 
     expect(await documentExists(col, id), 'Existing record not found').is.true;
 
+    const opQuery = Object.assign({ _id: new ObjectID(id) }, otherQueryParams);
     const res: DeleteWriteOpResultObject = await db
       .collection(col)
-      .deleteOne({ _id: new ObjectID(id) });
+      .deleteOne(opQuery);
 
     expect(res.result.ok, 'delete failed').eqls(1);
     expect(res.result.n, res.result.n + ' records were deleted, instead of 1').eqls(1);

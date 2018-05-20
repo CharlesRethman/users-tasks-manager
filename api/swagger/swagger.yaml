@@ -52,7 +52,7 @@ paths:
           schema:
             $ref: '#/definitions/UserDetails'
       responses:
-        '200':
+        '201':
           description: User created
           schema:
             $ref: '#/definitions/User'
@@ -155,7 +155,7 @@ paths:
           schema:
             $ref: '#/definitions/TaskDetails'
       responses:
-        '200':
+        '201':
           description: Task created
           schema:
             $ref: '#/definitions/Task'

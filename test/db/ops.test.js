@@ -85,7 +85,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should update the second document', async function() {
         try {
-          const res = await ops.update('users', id1, { first_name: 'Dale', last_name: 'Hurwitz' });
+          const res = await ops.update('users', id1, {}, { first_name: 'Dale', last_name: 'Hurwitz' });
           expect(res).eqls({
             id: id1,
             username: 'js@tadcaster.brew',
