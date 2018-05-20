@@ -78,7 +78,7 @@ export async function getTaskInfo(req, res, next): Promise<void> {
 
     const doc: any = await getOne(
       'tasks',
-      req.swagger.params.id.value,
+      req.swagger.params.task_id.value,
       { user_id: req.swagger.params.user_id.value },
       {}
     );

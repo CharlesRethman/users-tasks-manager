@@ -3,7 +3,6 @@
 const mocha = require('mocha');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const tap = require('babel-tap');
 
 const app = require('../../dist/app').default;
 const ops = require('../../dist/db/ops');
@@ -41,8 +40,6 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
 
   describe('#POST 4 tasks', function() {
         
-//    console.log('describe #POST: users =', users);
-
     tasksTest.forEach((e, i) => {
 
       it('should create a task ' + i, async function() {
@@ -74,24 +71,20 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
 
   describe('#GET all tasks for users', function() {
 
-    it('test #GET all tasks on each user', async function() {
+    it('test #GET all tasks on each user (see tests below)', async function() {
       const users = await getUsers();
-//      console.log('describe #GET all: users =', users);
 
       describe('testing #GET all tasks on each user', function() {
 
         users.forEach((user, i) => {
-//          console.log('#GET all: user =', user);
 
           it('should get ' + taskCounts[i] + ' tasks for user id = ' + user, async function() {
             try {
-//              console.log('it #GET all: users ' + i + ' =', user);
                 const res = await chai
                   .request(app)
                   .get('/api/users/' + users[i] + '/tasks');
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.length(taskCounts[i]);
-//                id = i === 1 ? res.body[1].id : id; // id used in next (#GET one) test
               return Promise.resolve();
             } catch(e) {
               return Promise.reject(e);
@@ -101,34 +94,35 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
         });
 
       });
+
+      const tasks = await ops.getMany('tasks', { user_id: users[1] }, {}, {});
+      id = tasks[1].id;
+      console.log('#GET all tasks: id =', id);
     });
 
   });
 
-    describe.skip('#GET one task', function() {
+  describe('#GET one task', function() {
 
-      it('should get a user', async function() {
-        try {
-          console.log('GET a task, user =', users[1]);
-          console.log('task id =', id);
-          console.log('request route =', '/api/users/' + users[1] + '/tasks/' + id);
-          const res = await chai
-            .request(app)
-            .get('/api/users/' + users[1] + '/tasks/' + id);
-//        console.log(Object.assign({}, tasksTest[2], { id: id }));
-          expect(res).to.have.status(200);
-          expect(res.body).to.deep.equal(Object.assign(
-            {},
-            tasksTest[3],
-            { user_id: users[1], id: id }
-          ));
-          return Promise.resolve();
-        } catch(e) {
-          return Promise.reject(e);
-        }
-      });
-
+    it('should get a user', async function() {
+      try {
+        const users = await getUsers();
+        const res = await chai
+          .request(app)
+          .get('/api/users/' + users[1] + '/tasks/' + id);
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal(Object.assign(
+          {},
+          tasksTest[1],
+          { user_id: users[1], id: id }
+        ));
+        return Promise.resolve();
+      } catch(e) {
+        return Promise.reject(e);
+      }
     });
+
+  });
 
     describe.skip('#UPDATE a task', function() {
 
@@ -160,9 +154,5 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
 
     });
 
-//    Promise.resolve();
-//  } catch(e) {
-//    Promise.reject(e);
-//  }
-
+    
 });
