@@ -155,7 +155,7 @@ paths:
           schema:
             $ref: '#/definitions/TaskDetails'
       responses:
-        '201':
+        '200':
           description: Task created
           schema:
             $ref: '#/definitions/Task'
@@ -293,7 +293,7 @@ definitions:
     allOf: 
       - type: object
         required:
-        - username
+          - username
         properties:
           username:
             type: string
@@ -313,10 +313,13 @@ definitions:
     allOf:
       - type: object
         required:
-        - id
-        - date_time
+          - id
+          - user_id
+          - date_time
         properties:
           id:
+            type: string
+          user_id:
             type: string
           status:
             type: string
@@ -328,19 +331,21 @@ definitions:
             type: string
           date_time:
             type: string
+            format: date-time
       - $ref: '#/definitions/TaskName'
   TaskDetails:
     type: object
     allOf:
       - type: object
         required:
-        - description
-        - date_time
+          - description
+          - date_time
         properties:
           description:
             type: string
           date_time:
             type: string
+            format: date-time
       - $ref: '#/definitions/TaskName'
   TaskName:
     type: object
@@ -351,6 +356,10 @@ definitions:
         type: string
   Deleted:
     type: object
+    required:
+      - collection
+      - id
+      - action
     properties:
       collection:
         type: string
@@ -359,7 +368,7 @@ definitions:
       action:
         type: string
         enum:
-          - Deleted
+          - deleted
   HelloWorldResponse:
     required:
       - message

@@ -65,7 +65,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should find the first document', async function() {
         try {
-          const res = await ops.getOne('users', id0);
+          const res = await ops.getOne('users', id0, {}, {});
           expect(res).eqls({
             id: id0,
             username: 'marlon@thegodfather.net',

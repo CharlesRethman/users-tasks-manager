@@ -56,7 +56,7 @@ export async function getMany(col, query, projection, sort) {
 }
 
 
-export async function getOne(col, id: string) {
+export async function getOne(col, id: string, query: any, projection: any) {
 
   try {
 
@@ -64,7 +64,7 @@ export async function getOne(col, id: string) {
 
     const result: any = await db
       .collection(col)
-      .findOne({ _id: new ObjectID(id) });
+      .findOne(Object.assign(query, { _id: new ObjectID(id) }));
     
     return result === null ? result : objectIdToString(result);
 

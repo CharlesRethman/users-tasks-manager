@@ -63,7 +63,7 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in directory `db/`.
 
-The testing creates a collection of 'users' in MongoDB, which are all deleted (empty collection remains).
+The testing creates a collection of 'users' in MongoDB, all but one of which are deleted (one document remains).
 
 Mocha test files in the `test/` directory were converted to JavaScript (like the GulpFile). This is due to an issue I had with the 'ts-node' compiler library, which, together with Mocha, seemed to start the server twice, causing a port error.
 `dbOps.ts` and `db.Opa.test.ts` were renamed to `ops.ts` and `ops.test.ts`, respectivley (they are in the `db/` directory).
@@ -72,8 +72,14 @@ Only one user from the 'users' collection is deleted in the db-CRUD tests, the o
 
 ### 5. Logging and environment configs
 
-> label: logging-and-environment-configs
+> Label: logging-and-environment-configs
 
 Using the 'config' library with three config files (default, dev and test) to choose configurations according to the  environment. Testing in a `test` environment (`NODE_ENV`), and uses a different database from running.
 
 Logging done by `Morgan`, a popular and common library, which is disabled during testing.
+
+### 6. Develop Unit Tests and Write the Code for the Controllers
+
+> Label: develop-tests-and-code-for-controllers
+
+`users.test.js` And `tasks.test.js` developed with `users.ts` and `tasks.ts` for users and tasks controllers, respectively. Tests are run off a fake data set stored in `testUsers.json` and `testTasks.json`.

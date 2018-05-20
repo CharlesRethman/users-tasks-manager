@@ -4,18 +4,24 @@ import {
   create,
   getMany,
   getOne,
-  update
+  update,
+  deleteOne
 } from '../db/ops';
 
 
 
-export async function createUser(req, res, next): Promise<void> {
+export async function createTask(req, res, next): Promise<void> {
   
   try {
 
-//    console.log('\nusers.ts: body =', req.swagger.params.user.value);
-    const doc: any = await create('users', req.swagger.params.user.value);
-//    console.log('users.ts: response =', doc);
+    const value: any = Object.assign(
+      {},
+      req.swagger.params.task.value,
+      { user_id: req.swagger.params.user_id.value }
+    );
+//    console.log('\ntasks.ts/createTask: value =', value);
+    const doc: any = await create('tasks', value);
+//    console.log('tasks.ts/createTask: response =', doc);
     res
       .status(200)
       .type('application/json')
@@ -36,11 +42,16 @@ export async function createUser(req, res, next): Promise<void> {
 }
 
 
-export async function listAllUsers(req, res, next): Promise<void> {
+export async function listAllUserTasks(req, res, next): Promise<void> {
 
   try {
 
-    const docs: any[] = await getMany('users', {}, {}, {});
+    const docs: any[] = await getMany(
+      'tasks',
+      { user_id: req.swagger.params.user_id.value },
+      {},
+      {}
+    );
     res
       .status(200)
       .type('application/json')
@@ -61,11 +72,16 @@ export async function listAllUsers(req, res, next): Promise<void> {
 }
 
 
-export async function getUserInfo(req, res, next): Promise<void> {
+export async function getTaskInfo(req, res, next): Promise<void> {
 
   try {
 
-    const doc: any = await getOne('users', req.swagger.params.id.value, {}, {});
+    const doc: any = await getOne(
+      'tasks',
+      req.swagger.params.id.value,
+      { user_id: req.swagger.params.user_id.value },
+      {}
+    );
     res
       .status(200)
       .type('application/json')
@@ -85,14 +101,14 @@ export async function getUserInfo(req, res, next): Promise<void> {
 }
 
 
-export async function updateUser(req, res, next): Promise<void> {
+export async function updateTask(req, res, next): Promise<void> {
 
   try {
 
     const doc: any = await update(
-      'users', 
+      'tasks', 
       req.swagger.params.id.value, 
-      req.swagger.params.user.value
+      req.swagger.params.task.value
     );
     res
       .status(200)

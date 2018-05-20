@@ -19,7 +19,7 @@ export async function documentExists(col: string, id: string): Promise<boolean> 
 
   try {
 
-    const result = await getOne(col, id);
+    const result = await getOne(col, id, {}, {});
     return result !== null;
 
   } catch(e) {

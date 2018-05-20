@@ -14,7 +14,7 @@ const expect = chai.expect;
 
 describe('`controllers/users.ts` tests. API requests', function() {
 
-  let id = 'empty';
+  let id; // variable to hold a user id for the 'GET all' request
 
   describe('#POST 3 users', function() {
 
@@ -67,7 +67,6 @@ describe('`controllers/users.ts` tests. API requests', function() {
         const res = await chai
           .request(app)
           .get('/api/users/' + id);
-//        console.log(Object.assign({}, usersTest[2], { id: id }));
         expect(res).to.have.status(200);
         expect(res.body).to.deep.equal(Object.assign({}, usersTest[2], { id: id }));
         return Promise.resolve();
