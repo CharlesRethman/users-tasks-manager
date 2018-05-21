@@ -1,13 +1,14 @@
 'use strict';
 
-const mocha = require('mocha');
-const chai = require('chai');
+import * as chai from 'chai'; // for .ts tests
+import * as mocha from 'mocha';
+import * as config from 'config';
 
-const connectDb = require('../../dist/db/connector').connectDb;
-const mongoDb = require('../../dist/app').mongoDb;
+import { mongoDb } from '../../dist/app';
+import { connectDb } from '../../dist/db/connector';
 
 const expect = chai.expect;
-const dbName = process.env.DATABASE || 'testUsersTasks'
+const dbName = process.env.DATABASE || config.get('database');
 
 
 describe('`db/connector.ts` tests', function() {

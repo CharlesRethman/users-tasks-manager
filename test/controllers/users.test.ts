@@ -1,11 +1,11 @@
 'use strict';
 
-const mocha = require('mocha');
-const chai = require('chai');
+import * as chai from 'chai';
+import * as mocha from 'mocha';
+
 const chaiHttp = require('chai-http');
 
-const app = require('../../dist/app').default;
-
+const app: Express.Application = require('../../dist/app').default;
 const usersTest = require('../resources/testUsers.json');
 
 chai.use(chaiHttp);
@@ -14,7 +14,7 @@ const expect = chai.expect;
 
 describe('`controllers/users.ts` tests. API requests', function() {
 
-  let id; // variable to hold a user id for the 'GET all' request
+  let id: string; // variable to hold a user id for the 'GET all' request
 
   describe('#POST 3 users', function() {
 
@@ -23,7 +23,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
 
         it('should create a user', async function() {
           try {
-            const res = await chai
+            const res: ChaiHttp.Response = await chai
               .request(app)
               .post('/api/users')
               .type('application/json')
@@ -46,7 +46,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
 
     it('should get all users', async function() {
       try {
-        const res = await chai
+        const res: ChaiHttp.Response = await chai
           .request(app)
           .get('/api/users');
         expect(res).to.have.status(200);
@@ -64,7 +64,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
 
     it('should get a user', async function() {
       try {
-        const res = await chai
+        const res: ChaiHttp.Response = await chai
           .request(app)
           .get('/api/users/' + id);
         expect(res).to.have.status(200);
@@ -81,7 +81,7 @@ describe('`controllers/users.ts` tests. API requests', function() {
 
     it('should update a user', async function() {
       try {
-        const res = await chai
+        const res: ChaiHttp.Response = await chai
           .request(app)
           .put('/api/users/' + id)
           .type('application/json')

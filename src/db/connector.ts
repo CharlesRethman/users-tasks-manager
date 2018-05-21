@@ -11,7 +11,7 @@ export async function connectDb(uri: string, dbName: string): Promise<DbClient> 
 
   try {
 
-    const client = await MongoClient.connect(uri);
+    const client: MongoClient = await MongoClient.connect(uri);
     return {
       client: client,
       db: client.db(dbName)

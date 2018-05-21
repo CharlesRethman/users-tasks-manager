@@ -1,4 +1,6 @@
 {
   "mongoUrl": "mongodb://localhost:27017",
-  "database": "usersTasks"
+  "database": "usersTasks",
+  "next_execute_date_time": "2018-05-20T13:30:17.738Z",
+  "scheduler_task_execute": "* /10 * * * *"
 }

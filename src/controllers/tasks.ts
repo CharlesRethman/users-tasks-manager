@@ -17,11 +17,9 @@ export async function createTask(req, res, next): Promise<void> {
     const value: any = Object.assign(
       {},
       req.swagger.params.task.value,
-      { user_id: req.swagger.params.user_id.value }
+      { user_id: req.swagger.params.user_id.value, status: 'pending' }
     );
-//    console.log('\ntasks.ts/createTask: value =', value);
     const doc: any = await create('tasks', value);
-//    console.log('tasks.ts/createTask: response =', doc);
     res
       .status(201)
       .type('application/json')

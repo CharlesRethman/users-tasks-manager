@@ -9,8 +9,6 @@ import { connectDb, DbClient } from './db/connector';
 
 const app: express.Application = express();
 
-//console.log('environment: NODE_ENV =', process.env.NODE_ENV);
-//console.log('Mongo connection parameters =', config.mongoUrl, config.database);
 const url = config.mongoUrl || 'mongodb://localhost:27017';
 const dbName = config.database || 'usersTasks';
 

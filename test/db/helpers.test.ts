@@ -1,13 +1,15 @@
 'use strict';
 
-const chai = require('chai');
-const mocha = require('mocha');
-const ObjectID = require('mongodb').ObjectID;
+import * as chai from 'chai'; // for .ts test
+import * as mocha from 'mocha';
+
+import { ObjectID } from 'mongodb';
+
+import { documentExists, objectIdToString } from '../../dist/db/helpers';
+
 const rewire = require('rewire');
 
-const helpers = require('../../dist/db/helpers');
-
-const expect = chai.expect;
+const expect: Chai.ExpectStatic = chai.expect;
 
 const helperFuncs = rewire('../../dist/db/helpers');
 const buildField = helperFuncs.__get__('buildField');
@@ -46,7 +48,7 @@ describe('`db/helper.ts` tests', function() {
 
     it('should have an empty object', async function() {
       try {
-        const res = await helpers.documentExists('users', 'FFFFFFFFF000AAACCC222444');
+        const res: boolean = await documentExists('users', 'FFFFFFFFF000AAACCC222444');
         expect(res).to.equal(false);
         return Promise.resolve();
       } catch(e) {
@@ -60,8 +62,8 @@ describe('`db/helper.ts` tests', function() {
   describe('objectIdToString test', function() {
 
     it('should take a payload with', function() {
-      expect(helpers.objectIdToString(payload).id).to.equal('123aad456ffe000ccb98701a');
-      expect(helpers.objectIdToString(payload)).eqls({
+      expect(objectIdToString(payload).id).to.equal('123aad456ffe000ccb98701a');
+      expect(objectIdToString(payload)).eqls({
         id: '123aad456ffe000ccb98701a',
         first_name: 'Freddie',
         last_name: 'Mercury',

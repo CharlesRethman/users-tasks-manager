@@ -1,22 +1,30 @@
 'use strict';
 
-const chai = require('chai');
-const mocha = require('mocha');
+import * as chai from 'chai';
+import * as mocha from 'mocha';
 
-const ops = require('../../dist/db/ops');
+import {
+  create,
+  deleteAll,
+  getMany,
+  getOne,
+  update,
+  deleteOne
+} from '../../dist/db/ops';
+
 const testUsers = require('../resources/testUsers.json');
 
-const expect = chai.expect;
+const expect: Chai.ExpectStatic = chai.expect;
 
-let id0 = 'empty';
-let id1 = 'empty';
+let id0: string;
+let id1: string;
 
 describe('`db/ops.ts` tests. Database CRUD', function() {
 
   before(async function() {
       try {
-        const docs = await ops.getMany('users', {}, {}, {});
-        const del = await ops.deleteAll('users');
+        const docs: any = await getMany('users', {}, {}, {});
+        const del: any = await deleteAll('users');
         expect(docs).to.have.length(del.n);
         return Promise.resolve();
       } catch(e) {
@@ -28,7 +36,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should create first document', async function() {
         try {
-          const res = await ops.create('users', testUsers[0]);
+          const res:any = await create('users', testUsers[0]);
             id0 = res.id
             expect(res.username).eqls('marlon@thegodfather.net');
             return Promise.resolve();
@@ -38,7 +46,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
       });
       it('should create second document', async function() {
         try {
-          const res = await ops.create('users', testUsers[1]);
+          const res: any = await create('users', testUsers[1]);
           id1 = res.id
           expect(res.username).eqls('js@tadcaster.brew');
           return Promise.resolve();
@@ -54,7 +62,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should find all documents', async function() {
         try {
-          const res = await ops.getMany('users', {}, {}, {});
+          const res: any[] = await getMany('users', {}, {}, {});
           expect(res).to.have.length(2);
           expect(res[0].username).equals(testUsers[0].username);
           return Promise.resolve();
@@ -65,7 +73,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should find the first document', async function() {
         try {
-          const res = await ops.getOne('users', id0, {}, {});
+          const res: any = await getOne('users', id0, {}, {});
           expect(res).eqls({
             id: id0,
             username: 'marlon@thegodfather.net',
@@ -85,7 +93,12 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should update the second document', async function() {
         try {
-          const res = await ops.update('users', id1, {}, { first_name: 'Dale', last_name: 'Hurwitz' });
+          const res: any = await update(
+            'users',
+            id1,
+            {},
+            { first_name: 'Dale', last_name: 'Hurwitz' }
+          );
           expect(res).eqls({
             id: id1,
             username: 'js@tadcaster.brew',
@@ -105,7 +118,7 @@ describe('`db/ops.ts` tests. Database CRUD', function() {
 
       it('should delete the first document', async function() {
         try {
-          const res = await ops.deleteOne('users', id1)
+          const res: any = await deleteOne('users', id1)
           expect(res).eqls({
             collection: 'users',
             id: id1,

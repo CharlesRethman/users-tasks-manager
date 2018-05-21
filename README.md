@@ -14,9 +14,8 @@ The project was regularly committed and the main commits have been tagged, this 
 1. Develop unit tests and write the code for the base db modules: the connector and db CRUD operations
 1. Logging and environment configs
 1. Develop unit tests and write the code for the controllers
-1. Develop unit tests and write the code for the workers (scheduler)
+1. Develop unit tests and write the code for the worker (scheduler)
 1. Develop e2e tests, based on the provided `curl` commands, as well as local tests in the appropriate controllers
-1. Final work to the code to ensure all tests pass and the API is constructed.
 1. Package and deploy the code to a server, ensuring the provided `curl` commands function as required.
 
 ### 1. Running the Swagger initialiser
@@ -56,7 +55,7 @@ Rearranged the files and directories. The `package.json` had the `"main"` and `"
 
 > Label: develop-tests-and-code-for-db
 
-> _Major Change to Stage 2 here_: 
+> _Change from Stage 2 here_: 
 >  - Changed the API `id` field to use the MongoDB `_id` field, not an auto-incrementing number. This means that the ObjectID type from the database must be converted into a 24-character string and the field name is changed from `_id` to `id`. The function for handling this, plus a `documentExists()` checker, are placed in a separate `helper.ts` module in the `db/` directory.
 
 `connector.test.ts` and `connector.ts` module in directory `db/`. The MongoDB Nodejs client library has changed from v 2 to v 3 in that the `connect()` method no longer returns a Db instance; it now returns a MongoClient instance from which the db is accessed.
@@ -65,7 +64,6 @@ CRUD testing in `dbOps.test.ts` and CRUD operations in `dbOps.ts` module in dire
 
 The testing creates a collection of 'users' in the test database ('testUsersTasks') in MongoDB, all but one of which are deleted (one document remains).
 
-Mocha test files in the `test/` directory were converted to JavaScript (like the GulpFile). This is due to an issue I had with the 'ts-node' compiler library, which, together with Mocha, seemed to start the server twice, causing a port error.
 `dbOps.ts` and `db.Opa.test.ts` were renamed to `ops.ts` and `ops.test.ts`, respectivley (they are in the `db/` directory).
 
 Only one user from the 'users' collection is deleted in the db-CRUD tests, the other user remains.
@@ -87,3 +85,19 @@ Logging done by `Morgan`, a popular and common library, which is disabled during
 The data are created and amended in the test database, one task of which is deleted by the tests. The environment variable, `CLEAN_TEST`, determines if all data are cleaned out at the end of the test. This variable needs to be set to 'true', 'yes', 't' or 'y' (case insensitive) for this to happen -- any other value will leave the data in after the test.
 
 To test the routing properly, the test checks the GET-all-user-tasks call for _each_ user. The struture of the test logic dictates that these calls are made at the end of the tasks suite.
+
+### 7. Develop unit tests and write the code for the worker (scheduler)
+
+> Label: develop-tests-and-code-for-worker
+
+_Note_: This functionality is included directly into the main API because of project specification. However, in real-world practice, the scheduler worker should be a daemon on its own, which will allow the horizontal scaling of the server.
+
+The assumption from the specification is that `next_execute_date_time` is a project constant, not a task field. This is assumed because none of the API calls include it as a field, which would have to be the case (e.g. if a task is 'scheduled'.). The project constant is set in the config files and can also be set in the environment (``)
+
+Used the `node-schedule` library to handle scheduling. The `scheduleJob()` method takes a string that follows the `cron` pattern, except that seconds can be included as well, and a callback. The callback contains the `job.executeTask()` method, which is tested in the suite.
+
+Logging the scheduled job simply uses the built-in `util` library. Server call logging uses `morgan`.
+
+
+
+

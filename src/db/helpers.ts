@@ -19,7 +19,7 @@ export async function documentExists(col: string, id: string): Promise<boolean> 
 
   try {
 
-    const result = await getOne(col, id, {}, {});
+    const result: any = await getOne(col, id, {}, {});
     return result !== null;
 
   } catch(e) {
@@ -30,7 +30,7 @@ export async function documentExists(col: string, id: string): Promise<boolean> 
 }
 
 
-export function objectIdToString<T>(payload: T) {
+export function objectIdToString<T>(payload: T): any {
 
   return Object.keys(payload)
     .reduce(
