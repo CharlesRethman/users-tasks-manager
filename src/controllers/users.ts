@@ -13,9 +13,7 @@ export async function createUser(req, res, next): Promise<void> {
   
   try {
 
-//    console.log('\nusers.ts: body =', req.swagger.params.user.value);
     const doc: any = await create('users', req.swagger.params.user.value);
-//    console.log('users.ts: response =', doc);
     res
       .status(201)
       .type('application/json')

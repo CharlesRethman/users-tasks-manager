@@ -1,8 +1,16 @@
 # Users Tasks Manager
 
+## Introduction
+
 API to manage users and users' tasks, including a scheduler.
 
 > A small detail: I have added `./node_modules/.bin` to my `PATH` variable so that I can install node applications locally and still run them from the command line if I am in an application root directory. If, for example, Typescript or Gulp are installed globally, the application should work but parameters on the `tsconfig.json` and `gulpfile.js` may need changing.
+
+The DB used is MongoDB and the project is configured to connect to a single local instance, without authentication.
+
+The test suite has 32 tests and uses a different database from the that used for other environments. Data are created during the test and are deleted if the CLEAN_TEST environment variable is set to 'true', 't', 'yes' or 'y'. They may be left un-cleaned to inspect the results, e.g. with the Mongo shell.
+
+The e2e tests are not cleaned out automatically; they should be cleaned with the Mongo shell (as per spec, tasks can be deleted but not users).
 
 ## How the Project was Constructed
 
@@ -17,6 +25,7 @@ The project was regularly committed and the main commits have been tagged, this 
 1. Develop unit tests and write the code for the worker (scheduler)
 1. Develop e2e tests, based on the provided `curl` commands
 1. Package and deploy the code to a server, ensuring the provided `curl` commands function as required.
+
 
 ### 1. Running the Swagger initialiser
 
@@ -103,14 +112,13 @@ The end-to-end test were developed as a Bash script, essentially running the spe
 
 Issue with the date-time data provided in `date_time`: it differs slightly from the `date-time` string format used in the Swagger (OpneAPI) spec, in that it consists of:
 ```
-yyyy-mm-dd hh:MM:ss
+'yyyy-mm-dd hh:MM:ss'
 ```
 instead of:
 ```
-yyyy-mm-ddThh:MM:ssZ
+'yyyy-mm-ddThh:MM:ssZ'
 ```
 which follows the RFC 3339, section 5.6 standard. An extra function was created in the tasks controller to handle this data case (as well as handle 'normal' data). The tests were modified accordingly.
 
 The script essentially assigns the output of each `curl` statement to a variable and `echo`s the variable. The relevant user_id and task_id is `grep`ed off the output.
-
 

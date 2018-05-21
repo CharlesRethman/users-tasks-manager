@@ -4,13 +4,15 @@ import * as config from 'config';
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as SwaggerExpress from 'swagger-express-mw';
+import * as scheduler from './workers/scheduler';
 
 import { connectDb, DbClient } from './db/connector';
 
 const app: express.Application = express();
 
-const url = config.mongoUrl || 'mongodb://localhost:27017';
+const url = config.mongoUrl || 'mongodb://127.0.0.1:27017';
 const dbName = config.database || 'usersTasks';
+
 
 export const mongoDb: Promise<DbClient> = connectDb(url, dbName);
 
@@ -34,9 +36,7 @@ SwaggerExpress.create(swaggerConfig, function(err, swaggerExpress) {
   const port = process.env.PORT || 3000;
   app.listen(port);
 
-  if (swaggerExpress.runner.swagger.paths['/hello']) {
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/api/hello?name=Scott');
-  }
+  scheduler.taskExecute
 
 });
 
