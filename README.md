@@ -15,7 +15,7 @@ The project was regularly committed and the main commits have been tagged, this 
 1. Logging and environment configs
 1. Develop unit tests and write the code for the controllers
 1. Develop unit tests and write the code for the worker (scheduler)
-1. Develop e2e tests, based on the provided `curl` commands, as well as local tests in the appropriate controllers
+1. Develop e2e tests, based on the provided `curl` commands
 1. Package and deploy the code to a server, ensuring the provided `curl` commands function as required.
 
 ### 1. Running the Swagger initialiser
@@ -97,6 +97,20 @@ Used the `node-schedule` library to handle scheduling. The `scheduleJob()` metho
 
 Logging the scheduled job simply uses the built-in `util` library. Server call logging uses `morgan`.
 
+### 8. Develop e2e tests, based on the provided `curl` commands
 
+The end-to-end test were developed as a Bash script, essentially running the specified `curl` commands, with the relevant ids and the hostname substituted in.
+
+Issue with the date-time data provided in `date_time`: it differs slightly from the `date-time` string format used in the Swagger (OpneAPI) spec, in that it consists of:
+```
+yyyy-mm-dd hh:MM:ss
+```
+instead of:
+```
+yyyy-mm-ddThh:MM:ssZ
+```
+which follows the RFC 3339, section 5.6 standard. An extra function was created in the tasks controller to handle this data case (as well as handle 'normal' data). The tests were modified accordingly.
+
+The script essentially assigns the output of each `curl` statement to a variable and `echo`s the variable. The relevant user_id and task_id is `grep`ed off the output.
 
 

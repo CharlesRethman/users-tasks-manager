@@ -9,10 +9,10 @@ import { documentExists, objectIdToString } from '../../dist/db/helpers';
 
 const rewire = require('rewire');
 
-const expect: Chai.ExpectStatic = chai.expect;
-
 const helperFuncs = rewire('../../dist/db/helpers');
 const buildField = helperFuncs.__get__('buildField');
+
+const expect: Chai.ExpectStatic = chai.expect;
 
 
 const payload = {

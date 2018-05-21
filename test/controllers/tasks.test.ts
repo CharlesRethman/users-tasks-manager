@@ -5,6 +5,11 @@ import * as mocha from 'mocha';
 
 import { deleteAll, getMany } from '../../dist/db/ops';
 
+const rewire = require('rewire');
+
+const tasksFuncs = rewire('../../dist/controllers/tasks');
+const fixDateTime = tasksFuncs.__get__('fixDateTime');
+
 const chaiHttp: Chai.ExpectStatic = require('chai-http');
 
 const app: Express.Application = require('../../dist/app').default;
@@ -57,7 +62,12 @@ describe('`controllers/tasks.ts` tests. API requests', function() {
           expect(res.body).to.deep.equal(Object.assign(
             {},
             tasksTest[i],
-            { id: res.body.id, user_id: user, status: 'pending' }
+            {
+              id: res.body.id,
+              user_id: user,
+              date_time: fixDateTime(tasksTest[i].date_time),
+              status: 'pending'
+            }
           ));
           return Promise.resolve();
         } catch(e) {

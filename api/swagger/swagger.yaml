@@ -345,7 +345,7 @@ definitions:
             type: string
           date_time:
             type: string
-            format: date-time
+            format: pattern '^date time'
       - $ref: '#/definitions/TaskName'
   TaskName:
     type: object

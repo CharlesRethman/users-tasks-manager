@@ -9,6 +9,17 @@ import {
 } from '../db/ops';
 
 
+function fixDateTime(date_time: string) {
+  return date_time.indexOf('T') === 10 && date_time.indexOf('Z') === date_time.length - 1
+  ? date_time
+  : (
+      date_time.substring(0, date_time.indexOf(' '))
+      + 'T'
+      + date_time.substring(date_time.indexOf(' ') + 1, date_time.length)
+      + 'Z'
+    )
+}
+
 
 export async function createTask(req, res, next): Promise<void> {
   
@@ -17,8 +28,13 @@ export async function createTask(req, res, next): Promise<void> {
     const value: any = Object.assign(
       {},
       req.swagger.params.task.value,
-      { user_id: req.swagger.params.user_id.value, status: 'pending' }
+      {
+        user_id: req.swagger.params.user_id.value,
+        status: 'pending',
+        date_time: fixDateTime(req.swagger.params.task.value.date_time)
+      }
     );
+
     const doc: any = await create('tasks', value);
     res
       .status(201)

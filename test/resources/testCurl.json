@@ -1,0 +1,9 @@
+[
+  "curl -i -H \"Content-Type: application/json\" -X POST -d '{\"username\":\"jsmith\",\"first_name\" : \"John\", \"last_name\" : \"Smith\"}' http://hostname/api/users",
+  "curl -i -H \"Content-Type: application/json\" -X PUT -d '{\"first_name\" : \"John\", \"last_name\" : \"Doe\"}' http://hostname/api/users/{id}",
+  "curl -i -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X GET http://hostname/api/users",
+  "curl -i -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"My task\",\"description\" : \"Description of task\", \"date_time\" : \"2016-05-25 14:25:00\"}' http://hostname/api/users/{user_id}/tasks",
+  "curl -i -H \"Content-Type: application/json\" -X PUT -d '{\"name\":\"My updated task\"}' http://hostname/api/users/{user_id}/tasks/{task_id}",
+  "curl -i -H \"Content-Type: application/json\" -X DELETE http://hostname/api/users/{user_id}/tasks/{task_id}",
+  "curl -i -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X GET http://hostname/api/users/{user_id}/tasks"
+]
