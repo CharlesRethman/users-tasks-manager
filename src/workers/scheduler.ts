@@ -18,7 +18,7 @@ function formatDate(date: Date): string {
     + ':' + (date.getUTCHours().toString().length === 1 ? '0' : '') 
     + date.getUTCHours().toString()
     + ':' + (date.getUTCMinutes().toString().length === 1 ? '0' : '')
-    + date.getUTCHours().toString()
+    + date.getUTCMinutes().toString()
     + ':' + (date.getUTCSeconds().toString().length === 1 ? '0' : '')
     + date.getUTCSeconds().toString()
     + ' +0000'
