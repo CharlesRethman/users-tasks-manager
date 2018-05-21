@@ -110,6 +110,8 @@ Logging the scheduled job simply uses the built-in `util` library. Server call l
 
 ### 8. Develop e2e tests, based on the provided `curl` commands
 
+> Label: e2e-testing
+
 The end-to-end test were developed as a Bash script, essentially running the specified `curl` commands, with the relevant ids and the hostname substituted in.
 
 Issue with the date-time data provided in `date_time`: it differs slightly from the `date-time` string format used in the Swagger (OpneAPI) spec, in that it consists of:
