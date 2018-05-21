@@ -127,3 +127,9 @@ which follows the RFC 3339, section 5.6 standard. An extra function was created 
 The script essentially assigns the output of each `curl` statement to a variable and `echo`s the variable. The relevant user_id and task_id is `grep`ed off the output.
 
 Removed the `/hello` and `/swagger` routes from the Swagger and code.
+
+### 9. Package and Deploy the Code to a Server
+
+> Label: package-and-deploy
+
+TODO: the server and a MongoDB database to be deployed into docker containers on AWS.
