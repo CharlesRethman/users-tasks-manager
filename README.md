@@ -12,6 +12,8 @@ The test suite has 32 tests and uses a different database from the that used for
 
 The e2e tests are not cleaned out automatically; they should be cleaned with the Mongo shell (as per spec, tasks can be deleted but not users).
 
+The scheduler is set every minute on the minute (except for the test, which is every 10 minutes), this can be changed in the configs.
+
 ## How the Project was Constructed
 
 The project was regularly committed and the main commits have been tagged, this helps in reviewing the development process. The steps are:
@@ -122,3 +124,4 @@ which follows the RFC 3339, section 5.6 standard. An extra function was created 
 
 The script essentially assigns the output of each `curl` statement to a variable and `echo`s the variable. The relevant user_id and task_id is `grep`ed off the output.
 
+Removed the `/hello` and `/swagger` routes from the Swagger and code.
