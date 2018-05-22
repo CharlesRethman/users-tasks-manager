@@ -340,12 +340,6 @@ definitions:
         type: string
         enum:
           - deleted
-  HelloWorldResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
   ErrorResponse:
     required:
       - message

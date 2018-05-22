@@ -13,8 +13,8 @@ function formatDate(date: Date): string {
   const month = ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   return (date.getUTCDate().toString().length === 1 ? '0' : ''
     + date.getUTCDate().toString())
-    + '/' + month[date.getMonth()]
-    + '/' + date.getFullYear() 
+    + '/' + month[date.getUTCMonth()]
+    + '/' + date.getUTCFullYear() 
     + ':' + (date.getUTCHours().toString().length === 1 ? '0' : '') 
     + date.getUTCHours().toString()
     + ':' + (date.getUTCMinutes().toString().length === 1 ? '0' : '')

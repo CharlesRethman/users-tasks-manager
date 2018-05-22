@@ -42,7 +42,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "start": "node ./dist/app.js",
-    "test": "export NODE_ENV=test && export CLEAN_TEST=f && mocha -C --reporter spec --exit --require ts-node/register 'test/db/*.test.ts' 'test/controllers/users.test.ts' 'test/controllers/tasks.test.ts' 'test/workers/jobs.test.ts'",
+    "test": "export NODE_ENV=test && export CLEAN_TEST=y && mocha -C --reporter spec --exit --require ts-node/register 'test/db/*.test.ts' 'test/controllers/users.test.ts' 'test/controllers/tasks.test.ts' 'test/workers/jobs.test.ts'",
     "build": "gulp scripts"
   }
 }
