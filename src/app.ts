@@ -12,7 +12,6 @@ import { connectDb, DbClient } from './db/connector';
 
 const url = config.mongoUrl || 'mongodb://127.0.0.1:27017';
 const dbName = config.database || 'usersTasks';
-
 export const mongoDb: Promise<DbClient> = connectDb(url, dbName);
 
 const app: express.Application = express();

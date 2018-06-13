@@ -3,7 +3,6 @@
 import { Db, ObjectID } from 'mongodb';
 
 import { getOne } from './ops';
-import { mongoDb } from '../app';
 
 
 function buildField(key: string, value: any, o?: any) {
