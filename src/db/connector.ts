@@ -1,6 +1,7 @@
 'use strict';
 
 import { Db, MongoClient, MongoClientOptions } from 'mongodb';
+//import { NewMongoClientOptions } from './types';
 
 export interface DbClient {
   db: Db,
@@ -11,7 +12,7 @@ export async function connectDb(uri: string, dbName: string): Promise<DbClient> 
 
   try {
 
-    const client: MongoClient = await MongoClient.connect(uri);
+    const client: MongoClient = await MongoClient.connect(uri, { useNewUrlParser: true });
     return {
       client: client,
       db: client.db(dbName)

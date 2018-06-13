@@ -5,6 +5,7 @@ import * as util from 'util';
 
 import * as schedule from 'node-schedule';
 
+import { myStream } from './winston';
 import { executeTasks } from './jobs';
 
 
@@ -27,13 +28,13 @@ function formatDate(date: Date): string {
 
 const scheduleTaskExecute = process.env.SCHEDULER_TASK_EXECUTE || config.schedule_task_execute;
 
-export const taskExecute = schedule.scheduleJob(scheduleTaskExecute, async function() { 
+export const taskExecute = schedule.scheduleJob(scheduleTaskExecute, async function() {
 
-  console.log('::ffff:127.0.0.1 - - [' + formatDate(new Date()) + '] "executing scheduled job"');
+  myStream.write('::ffff:127.0.0.1 - - [' + formatDate(new Date()) + '] "executing scheduled job"');
   const job: any[] = await executeTasks(
     new Date(process.env.NEXT_EXECUTE_DATE_TIME || config.next_execute_date_time),
     new Date()
   );
-  console.log('::ffff:127.0.0.1 - - [' + formatDate(new Date()) + '] "result: ' + util.inspect(job) + '"');
+  myStream.write('::ffff:127.0.0.1 - - [' + formatDate(new Date()) + '] "result: ' + util.inspect(job) + '"');
 
 });
