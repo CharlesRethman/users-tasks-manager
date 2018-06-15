@@ -22,6 +22,7 @@ class App {
 
       if (err) { throw err; }
 
+      // unless a test running, use morgan to log requests
       if(config.util.getEnv('NODE_ENV') !== 'test') {
         this.express.use(morgan('combined' , { stream: logger.myStream }));
       }
@@ -29,6 +30,7 @@ class App {
       // install middleware
       swaggerExpress.register(express);
 
+      // start scheduler tasks
       scheduler.taskExecute
     
     });

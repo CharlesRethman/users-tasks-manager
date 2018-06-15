@@ -1,0 +1,5 @@
+mongoUrl: mongodb://127.0.0.1:27017
+database: testUsersTasks
+next_execute_date_time: 2018-05-20T13:30:17.738Z
+schedule_task_execute: 00 */10 * * * *
+port: 3000

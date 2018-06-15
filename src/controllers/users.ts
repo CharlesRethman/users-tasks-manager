@@ -8,7 +8,6 @@ import {
 } from '../db/ops';
 
 
-
 export async function createUser(req, res, next): Promise<void> {
   
   try {
@@ -22,7 +21,7 @@ export async function createUser(req, res, next): Promise<void> {
 
   } catch(e) {
 
-    // logger
+    // TODO: logger
     res
       .status(404)
       .type('application/json')
@@ -47,7 +46,7 @@ export async function listAllUsers(req, res, next): Promise<void> {
 
   } catch(e) {
 
-    //logger
+    // TODO: logger
     res
       .status(404)
       .type('application/json')
@@ -72,7 +71,7 @@ export async function getUserInfo(req, res, next): Promise<void> {
 
   } catch(e) {
 
-    //logger
+    // TODO: logger
     res
       .status(404)
       .type('application/json')
@@ -101,7 +100,7 @@ export async function updateUser(req, res, next): Promise<void> {
 
   } catch(e) {
 
-    //logger
+    // TODO: logger
     res
       .status(404)
       .type('application/json')

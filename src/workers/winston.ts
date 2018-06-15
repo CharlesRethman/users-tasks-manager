@@ -3,7 +3,6 @@
 import * as winston from 'winston';
 
 
-
 const options: winston.LoggerOptions = {
   console: {
     level: 'info',

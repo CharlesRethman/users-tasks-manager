@@ -7,3 +7,7 @@ declare module 'mongodb' {
   }
 
 }
+
+declare module 'config' {
+
+}

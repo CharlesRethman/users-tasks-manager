@@ -13,13 +13,14 @@ gulp.task('scripts', () => {
   return tsResult.js.pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', ['scripts'], () => {
-  gulp.watch('src/**/*.ts', ['scripts']);
-});
+gulp.task('watch', gulp.series(['scripts'], () => {
+  gulp.watch('src/**/*.ts', gulp.series(['scripts']));
+}));
+
 
 gulp.task('assets', function() {
   return gulp.src(JSON_FILES)
   .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('default', ['watch', 'assets']);
+gulp.task('default', gulp.parallel(['watch', 'assets']));

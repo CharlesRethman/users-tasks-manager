@@ -1,7 +1,6 @@
 'use strict';
 
-import { Db, MongoClient, MongoClientOptions } from 'mongodb';
-//import { NewMongoClientOptions } from './types';
+import { Db, MongoClient } from 'mongodb';
 
 export interface DbClient {
   db: Db,

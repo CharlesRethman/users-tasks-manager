@@ -1,13 +1,13 @@
 'use strict';
 
 import * as chai from 'chai';
-import * as mocha from 'mocha';
 
 const chaiHttp = require('chai-http');
 
-const app: Express.Application = require('../../dist/app').default;
 const usersTest = require('../resources/testUsers.json');
+const app: Express.Application = require('../../dist/app').default;
 
+console.log(usersTest);
 chai.use(chaiHttp);
 const expect = chai.expect;
 
