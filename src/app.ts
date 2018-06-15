@@ -10,7 +10,6 @@ import * as logger from './workers/winston';
 
 import { connectDb, DbClient } from './db/connector';
 
-
 const app: express.Application = express();
 
 const appRoot = __dirname.substring(0, __dirname.indexOf('users-tasks-manager') + 19);
