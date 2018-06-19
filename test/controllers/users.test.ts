@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 const usersTest = require('../resources/testUsers.json');
 const app: Express.Application = require('../../dist/app').default;
 
-console.log(usersTest);
+//console.log(usersTest);
 chai.use(chaiHttp);
 const expect = chai.expect;
 
